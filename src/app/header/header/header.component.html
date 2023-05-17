@@ -1,0 +1,16 @@
+<div *ngIf="isAuthenticated" class="container-fluid p-3 bg-dark bg-gradient">
+  <div class="row">
+    <div class="col">
+      <div class="float-end">
+        <p class="d-inline p-3 text-light">
+          {{ user.lastName + ", " + user.firstName }}
+        </p>
+        <span
+          ><button class="btn btn-light" (click)="onLogout()">
+            <small>LOGOUT</small>
+          </button></span
+        >
+      </div>
+    </div>
+  </div>
+</div>

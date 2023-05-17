@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <app-side-pane />
+    </div>
+    <div class="col-9">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="border-bottom">
+              <h2>View Candidates</h2>
+            </div>
+            <br /><br />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Branch</th>
+                  <th scope="col">Designation</th>
+                  <th scope="col">Symbol</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let candidate of candidates; index as indexOfelement"
+                >
+                  <th scope="row">{{ indexOfelement + 1 }}</th>
+                  <td>{{ candidate.firstName }}</td>
+                  <td>{{ candidate.lastName }}</td>
+                  <td>{{ candidate.branch }}</td>
+                  <td>{{ candidate.designation }}</td>
+                  <td>{{ candidate.symbol }}</td>
+                  <td>
+                    <button
+                      class="btn btn-dark"
+                      (click)="onRemoveCandidate(candidate)"
+                    >
+                      <small>REMOVE</small>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
