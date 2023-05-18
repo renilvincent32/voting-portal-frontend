@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, tap } from "rxjs";
+import { take } from "rxjs/operators";
 import { BackendService } from "./backend.service";
 import { User } from "./user.model";
 
@@ -40,5 +41,14 @@ export class AuthService {
         this.user.next(null);
         localStorage.removeItem("userData");
         this.router.navigate(["/login"]);
+    }
+
+    public getBasicAuthHeader() {
+        let authorizationHeader = null;
+        this.user.pipe(take(1)).subscribe(user => {
+            const encodedStr = btoa(unescape(encodeURIComponent(user.collegeId + ':test')));
+            authorizationHeader = 'Basic ' + encodedStr;
+        });
+        return authorizationHeader;
     }
 }

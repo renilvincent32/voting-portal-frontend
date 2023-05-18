@@ -36,4 +36,9 @@ export class BackendService {
         let request : { collegeId: string, isAdmin: boolean } = { collegeId, isAdmin };
         return this.httpClient.post<User>(this.BASE_URI + 'login', request); 
     }
+
+    casteVote(requestToCall, authorizationHeader: string) {
+        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
+        return this.httpClient.post(this.BASE_URI + 'castVote', requestToCall, { headers: headers });
+    }
 }

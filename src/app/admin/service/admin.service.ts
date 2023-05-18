@@ -15,7 +15,7 @@ export class AdminService {
     constructor(private backendService: BackendService, private authService: AuthService) {}
 
     addDesignation(designation: Designation) {
-        const authorizationHeader = this.getBasicAuthHeader();
+        const authorizationHeader = this.authService.getBasicAuthHeader();
         return this.backendService.addDesignations([designation.name], authorizationHeader);
     }
 
@@ -25,12 +25,12 @@ export class AdminService {
     }
 
     getAllDesignations() {
-        const authorizationHeader = this.getBasicAuthHeader();
+        const authorizationHeader = this.authService.getBasicAuthHeader();
         return this.backendService.fetchAllDesignations(authorizationHeader);
     }
 
     addCandidate(candidate: Candidate) {
-        const authorizationHeader = this.getBasicAuthHeader();
+        const authorizationHeader = this.authService.getBasicAuthHeader();
         return this.backendService.addCandidate(candidate, authorizationHeader);
     }
 
@@ -40,20 +40,11 @@ export class AdminService {
     }
 
     getAllCandidates() {
-        const authorizationHeader = this.getBasicAuthHeader();
+        const authorizationHeader = this.authService.getBasicAuthHeader();
         return this.backendService.fetchAllCandidates(authorizationHeader);
     }
 
     getBranches() {
         return ['Computer Science', 'Biology', 'Humanities', 'Mathematics', 'Physics'];
-    }
-
-    private getBasicAuthHeader() {
-        let authorizationHeader = null;
-        this.authService.user.pipe(take(1)).subscribe(user => {
-            const encodedStr = btoa(unescape(encodeURIComponent(user.collegeId + ':test')));
-            authorizationHeader = 'Basic ' + encodedStr;
-        });
-        return authorizationHeader;
     }
 }

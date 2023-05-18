@@ -31,6 +31,7 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header/header.component';
 import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/display-candidates.component';
+import { ConfirmationPopupComponent } from './voter/utils/confirmation-popup/confirmation-popup.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/
     ViewCandidatesComponent,
     ResultComponent,
     HeaderComponent,
-    DisplayCandidatesComponent
+    DisplayCandidatesComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
