@@ -20,6 +20,8 @@ export class CandidatesComponent {
 
   constructor(private adminService: AdminService, private errorHandler: ErrorHandlingService) {}
 
+  avatarSelected: File = null;
+
   ngOnInit() {
     this.adminService.getAllDesignations().subscribe(designations => {
       this.designations = designations.map(designation => new Designation(designation.name, designation.noOfCandidates, designation.id));
@@ -32,7 +34,7 @@ export class CandidatesComponent {
 
   onSubmit() {
     this.isLoader = true;
-    console.log(this.addCandidateForm.value);
+    console.log(this.avatarSelected);
     var firstName = this.addCandidateForm.value.firstName;
     var lastName = this.addCandidateForm.value.lastName;
     var branch = this.addCandidateForm.value.branch;
@@ -50,6 +52,11 @@ export class CandidatesComponent {
       setTimeout(() => this.errorMessage = null, 5000);
     });
     this.addCandidateForm.reset();
+  }
+
+  selectedAvatar(event) {
+    const file = event.target.files[0];
+    this.avatarSelected = <File>file;
   }
 
 }

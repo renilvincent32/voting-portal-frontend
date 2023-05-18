@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login/login.component';
 import { AppHomeComponent } from './home/app-home/app-home.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { DesignationsComponent } from './admin/designations/designations.component';
 import { CandidatesComponent } from './admin/candidates/candidates.component';
@@ -50,6 +50,7 @@ import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MdbAccordionModule,
     MdbCarouselModule,

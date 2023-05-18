@@ -113,7 +113,7 @@
                       <select
                         id="branch"
                         name="branch"
-                        class="form-control"
+                        class="form-select"
                         ngModel
                         required
                         #branch="ngModel"
@@ -162,7 +162,7 @@
                       <select
                         id="designation"
                         name="designation"
-                        class="form-control"
+                        class="form-select"
                         ngModel
                         #designation="ngModel"
                         required
@@ -199,6 +199,25 @@
                         *ngIf="!symbol.valid && symbol.touched"
                         >Please enter Symbol</span
                       >
+                    </div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col">
+                      <div class="form-group">
+                        <input
+                          style="display: none"
+                          type="file"
+                          (change)="selectedAvatar($event)"
+                          #fileInput
+                        />
+                        <button
+                          class="btn btn-dark"
+                          type="button"
+                          (click)="fileInput.click()"
+                        >
+                          <small>CHOOSE AVATAR</small>
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div class="row">

@@ -41,6 +41,7 @@
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div *ngIf="isAdmin; else welcome_voter_banner">
           <h4>Hello Admin</h4>
+          <p class="description small">Please login and manage the dashboard</p>
         </div>
         <ng-template #welcome_voter_banner>
           <h4>Hello Voter</h4>
