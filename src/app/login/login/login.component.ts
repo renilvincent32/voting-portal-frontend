@@ -30,7 +30,8 @@ export class LoginComponent {
 
   onSubmit() {
     const collegeId = String(this.loginForm.value.collegeId);
-    this.authService.handleLogin(collegeId, this.isAdmin)
+    const password = this.isAdmin ? String(this.loginForm.value.password) : "";
+    this.authService.handleLogin(collegeId, password, this.isAdmin)
     .subscribe(() => {
       if (this.isAdmin) {
         this.router.navigate(['/admin/dashboard']);

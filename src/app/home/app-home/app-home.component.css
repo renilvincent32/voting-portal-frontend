@@ -71,3 +71,9 @@ a {
 .tile.orange:hover {
   background: #b8431f;
 }
+
+.main-div {
+  background-image: url("https://amymhaddad.s3.amazonaws.com/morocco-blue.png");
+  z-index: 9;
+  margin: 30px;
+}

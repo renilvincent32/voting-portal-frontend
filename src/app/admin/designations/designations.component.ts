@@ -29,32 +29,36 @@ export class DesignationsComponent {
     this.isFetching = true;
     let addedDesignation = String(this.addDesignationForm.value.designationName);
     let designation = new Designation(addedDesignation, 0);
-    this.adminService.addDesignation(designation).subscribe(() => {
-      this.isFetching = false;
-      this.successMessage = "Designation added successfully";
-      setTimeout(() => this.successMessage = null, 5000);
-      this.setDesignations(this.adminService.getAllDesignations());
-    }, error => {
-      this.isFetching = false;
-      this.errorMessage = this.errorHandler.handleHttpError(error);
-      setTimeout(() => this.errorMessage = null, 5000);
-    });
+    this.adminService.addDesignation(designation)
+    .subscribe(() => this.handleSuccess("Designation added successfully"), 
+    error => this.handleError(error));
     this.addDesignationForm.reset();
   }
 
   onRemoveDesignation(designation: Designation) {
-    this.adminService.removeDesignation(designation);
-    //call backend to remove the designation
+    this.isFetching = true;
+    this.adminService.removeDesignation(designation)
+    .subscribe(() => this.handleSuccess("Designation removed successfully"), 
+    error => this.handleError(error));
+  }
+
+  private handleSuccess(message: string) {
+    this.isFetching = false;
+    this.successMessage = message;
+    setTimeout(() => this.successMessage = null, 5000);
+    this.setDesignations(this.adminService.getAllDesignations());
+  }
+
+  private handleError(error) {
+    this.isFetching = false;
+    this.errorMessage = this.errorHandler.handleHttpError(error);
+    setTimeout(() => this.errorMessage = null, 5000);
   }
 
   private setDesignations(subscription: Observable<Designation[]>) {
     subscription.subscribe(designations => {
       this.isFetching = false;
       this.designations = designations.map(designation => new Designation(designation.name, designation.noOfCandidates, designation.id));
-    }, error => {
-      this.errorMessage = this.errorHandler.handleHttpError(error);
-      this.isFetching = false;
-      setTimeout(() => this.errorMessage = null, 5000);
-    });
+    }, error => this.handleError(error));
   }
 }

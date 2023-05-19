@@ -6,7 +6,7 @@ export class ErrorHandlingService {
 
     handleHttpError(error: HttpErrorResponse) {
         let errorMsg = null;
-        switch (+error.error.status) {
+        switch (+error.status) {
             case 403: errorMsg = "You are not authorized to perform this operation"; break;
             case 401: errorMsg = "You are not authenticated to perform this operation"; break;
             case 400: errorMsg = "Bad Request: " + error.error.message; break;

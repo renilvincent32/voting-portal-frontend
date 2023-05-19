@@ -32,13 +32,30 @@ export class BackendService {
         return this.httpClient.get<Candidate[]>(this.BASE_URI + 'getCandidates', { headers: headers });
     }
 
-    handleLogin(collegeId: string, isAdmin: boolean) {
-        let request : { collegeId: string, isAdmin: boolean } = { collegeId, isAdmin };
+    handleLogin(collegeId: string, password: string, isAdmin: boolean) {
+        let request : { collegeId: string, password: string, isAdmin: boolean } = { collegeId, password, isAdmin };
         return this.httpClient.post<User>(this.BASE_URI + 'login', request); 
     }
 
     casteVote(requestToCall, authorizationHeader: string) {
         const headers = new HttpHeaders({'Authorization' : authorizationHeader});
         return this.httpClient.post(this.BASE_URI + 'castVote', requestToCall, { headers: headers });
+    }
+
+    deleteDesignationById(id: number, authorizationHeader: string) {
+        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
+        return this.httpClient.delete(this.BASE_URI + 'deleteDesignation/' + id, { headers: headers });
+    }
+
+    deleteCandidateById(id: number, authorizationHeader: string) {
+        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
+        return this.httpClient.delete(this.BASE_URI + 'deleteCandidate/' + id, { headers: headers });
+    }
+
+    fetchResults(authorizationHeader: string) {
+        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
+        return this.httpClient.get<{ candidateData: [{ candidateName: string, voteCount: number }], 
+                                     winnerData: [{ designationName: string, candidateName: string }]}>
+        (this.BASE_URI + 'fetchVoteResults', { headers: headers });
     }
 }

@@ -3,6 +3,39 @@
     <div class="col-3">
       <app-side-pane />
     </div>
-    <div class="col-9">Results goes here</div>
+    <div class="col-9">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <ul class="list-group">
+              <li
+                *ngFor="let winner of winnerData"
+                class="list-group-item list-group-item-success"
+              >
+                <strong>{{
+                  winner.designationName + " (WINNER) " | uppercase
+                }}</strong>
+                -
+                {{ winner.candidateName }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <br /><br />
+        <div class="row">
+          <div class="col">
+            <ul class="list-group">
+              <li
+                *ngFor="let candidate of candidateData"
+                class="list-group-item"
+              >
+                <strong>{{ candidate.candidateName }}</strong> -
+                {{ candidate.voteCount }} votes
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

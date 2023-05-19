@@ -90,7 +90,7 @@
       </div>
       <div class="float-end mb-3">
         <button
-          class="btn btn-dark btn-lg bg-gradient"
+          class="btn btn-primary btn-lg bg-gradient"
           data-bs-toggle="modal"
           data-bs-target="#exampleModal"
         >
@@ -139,14 +139,14 @@
               </td>
               <td>
                 <button
-                  class="btn btn-outline-secondary btn-sm"
+                  class="btn btn-warning btn-sm"
                   (click)="onCastVote(candidate)"
                   [disabled]="
                     selectedDesignations.length > 0 &&
                     selectedDesignations.includes(candidate.designation)
                   "
                 >
-                  <small>CAST VOTE</small>
+                  <small><strong>CAST VOTE</strong></small>
                 </button>
               </td>
             </tr>

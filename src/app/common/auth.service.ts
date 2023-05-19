@@ -12,8 +12,8 @@ export class AuthService {
 
     constructor(private backendService: BackendService, private router: Router) {}
 
-    handleLogin(collegeId: string, isAdmin: boolean) {
-        return this.backendService.handleLogin(collegeId, isAdmin)
+    handleLogin(collegeId: string, password: string, isAdmin: boolean) {
+        return this.backendService.handleLogin(collegeId, password, isAdmin)
         .pipe(tap(response => {
             const loginUser = new User(response.collegeId, response.firstName, response.lastName, 
                 response.branch, response.isAdmin);

@@ -9,7 +9,6 @@ import { Designation } from "../designations/designation.model";
     providedIn: 'root'
 })
 export class AdminService {
-    designations: Designation[] = [];
     candidates: Candidate[] = [];
 
     constructor(private backendService: BackendService, private authService: AuthService) {}
@@ -20,8 +19,8 @@ export class AdminService {
     }
 
     removeDesignation(designation: Designation) {
-        var indexToBeRemoved = this.designations.indexOf(designation);
-        this.designations.splice(indexToBeRemoved, 1);
+        const authorizationHeader = this.authService.getBasicAuthHeader();
+        return this.backendService.deleteDesignationById(designation.id, authorizationHeader);
     }
 
     getAllDesignations() {
@@ -35,8 +34,8 @@ export class AdminService {
     }
 
     removeCandidate(candidate: Candidate) {
-        var indexToBeRemoved = this.candidates.indexOf(candidate);
-        this.candidates.splice(indexToBeRemoved, 1);
+        const authorizationHeader = this.authService.getBasicAuthHeader();
+        return this.backendService.deleteCandidateById(candidate.id, authorizationHeader);
     }
 
     getAllCandidates() {
@@ -46,5 +45,10 @@ export class AdminService {
 
     getBranches() {
         return ['Computer Science', 'Biology', 'Humanities', 'Mathematics', 'Physics'];
+    }
+
+    fetchResults() {
+        const authorizationHeader = this.authService.getBasicAuthHeader();
+        return this.backendService.fetchResults(authorizationHeader);
     }
 }
