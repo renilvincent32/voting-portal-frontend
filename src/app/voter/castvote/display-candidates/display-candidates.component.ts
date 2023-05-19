@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Candidate } from 'src/app/admin/candidates/candidate.model';
 import { VoterService } from '../../voter.service';
 
@@ -9,7 +10,7 @@ import { VoterService } from '../../voter.service';
 })
 export class DisplayCandidatesComponent {
 
-  constructor(private voterService: VoterService) {}
+  constructor(private voterService: VoterService, private router: Router) {}
 
   isLoading = false;
   candidatesByDesignation = null;
@@ -34,6 +35,7 @@ export class DisplayCandidatesComponent {
     setTimeout(() => this.isVotingComplete = true, 5000);
     if (this.isVotingComplete) {
       this.voterService.castVote(this.selectedCandidates).subscribe();
+      this.router.navigate(["/voter/display-success"]);
     }
   }
 

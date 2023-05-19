@@ -9,6 +9,7 @@ import { AuthGuard } from './common/auth.guard';
 import { AppHomeComponent } from './home/app-home/app-home.component';
 import { LoginComponent } from './login/login/login.component';
 import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/display-candidates.component';
+import { DisplaySuccessComponent } from './voter/castvote/display-success/display-success.component';
 
 const routes: Routes = [
   { 
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: 'cast-vote',
         component: DisplayCandidatesComponent
+      },
+      {
+        path: 'display-success',
+        component: DisplaySuccessComponent
       }
     ]
   },
