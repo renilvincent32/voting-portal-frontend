@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Candidate } from "../admin/candidates/candidate.model";
 import { Designation } from "../admin/designations/designation.model";
@@ -18,8 +18,18 @@ export class BackendService {
     }
 
     addCandidate(candidate: Candidate, authorizationHeader: string) {
-        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
-        return this.httpClient.post(this.BASE_URI + 'addCandidate', candidate, { headers: headers });
+        const headers = new HttpHeaders({
+            "Authorization" : authorizationHeader
+        });
+        const formData = new FormData();
+        formData.append("firstName", candidate.firstName);
+        formData.append("lastName", candidate.lastName);
+        formData.append("branch", candidate.branch);
+        formData.append("symbol", candidate.symbol);
+        formData.append("campaignQuote", candidate.campaignQuote);
+        formData.append("designation", candidate.designation);
+        formData.append("avatar", candidate.img);
+        return this.httpClient.post(this.BASE_URI + 'addCandidate', formData, { headers: headers });
     }
 
     fetchAllDesignations(authorizationHeader: string) {

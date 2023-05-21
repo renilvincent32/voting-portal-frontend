@@ -6,7 +6,8 @@ export class Candidate {
         public campaignQuote: string,
         public designation: string,
         public symbol: string,
-        public imgPath: string,
-        public id?: number) {
+        public img: File,
+        public id?: number,
+        public imgData?: string) {
     }
 }

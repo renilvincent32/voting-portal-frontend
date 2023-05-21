@@ -41,7 +41,7 @@ export class CandidatesComponent {
     var campaignQuote = this.addCandidateForm.value.campaignQuote;
     var designation = this.addCandidateForm.value.designation;
     var symbol = this.addCandidateForm.value.symbol;
-    var candidate: Candidate = new Candidate(firstName, lastName, branch, campaignQuote, designation, symbol, '');
+    var candidate: Candidate = new Candidate(firstName, lastName, branch, campaignQuote, designation, symbol, this.avatarSelected);
     this.adminService.addCandidate(candidate).subscribe(() => {
       this.isLoader = false;
       this.successMessage = "Candidate added successfully";

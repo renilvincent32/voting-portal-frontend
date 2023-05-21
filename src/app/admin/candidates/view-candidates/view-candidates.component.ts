@@ -35,9 +35,9 @@ export class ViewCandidatesComponent {
     })
   }
 
-  private setCandidates(candidates) {
+  private setCandidates(candidates: Candidate[]) {
     this.candidates = candidates.map(candidate => 
       new Candidate(candidate.firstName, candidate.lastName, candidate.branch, 
-        candidate.campaignQuote, candidate.designation, candidate.symbol, candidate.imgPath, candidate.id));
+        candidate.campaignQuote, candidate.designation, candidate.symbol, candidate.img, candidate.id));
   }
 }
