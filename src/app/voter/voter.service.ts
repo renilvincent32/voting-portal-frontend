@@ -50,7 +50,8 @@ export class VoterService {
                 candidates.map(candidate =>  
                     new Candidate(candidate.firstName, candidate.lastName, candidate.branch, 
                         candidate.campaignQuote, candidate.designation, candidate.symbol, 
-                        candidate.img, candidate.id, "data:image/png;base64,"+candidate.imgData) )))
+                        candidate.img, candidate.id, 
+                        candidate.imgData ? "data:image/png;base64,"+candidate.imgData: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png") )))
             .subscribe(data => {
                 this.candidates = data;
             }, error => {
