@@ -24,15 +24,23 @@
         <br /><br />
         <div class="row">
           <div class="col">
-            <ul class="list-group">
-              <li
-                *ngFor="let candidate of candidateData"
-                class="list-group-item"
-              >
-                <strong>{{ candidate.candidateName }}</strong> -
-                {{ candidate.voteCount }} votes
-              </li>
-            </ul>
+            <div class="m-2" *ngFor="let designation of designations">
+              <p class="h6 bg-dark bg-gradient text-white p-2">
+                VOTE RESULTS OF
+                {{ designation | uppercase }} CANDIDATES
+              </p>
+              <ul class="list-group">
+                <li
+                  *ngFor="let candidate of candidateDesignationMap[designation]"
+                  class="list-group-item"
+                >
+                  <div>
+                    <strong>{{ candidate.candidateName }}</strong>
+                    - {{ candidate.voteCount }} votes
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

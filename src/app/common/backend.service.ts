@@ -64,7 +64,7 @@ export class BackendService {
 
     fetchResults(authorizationHeader: string) {
         const headers = new HttpHeaders({'Authorization' : authorizationHeader});
-        return this.httpClient.get<{ candidateData: [{ candidateName: string, voteCount: number }], 
+        return this.httpClient.get<{ candidateData: [{ candidateName: string, voteCount: number, designationName: string }], 
                                      winnerData: [{ designationName: string, candidateName: string }]}>
         (this.BASE_URI + 'fetchVoteResults', { headers: headers });
     }
