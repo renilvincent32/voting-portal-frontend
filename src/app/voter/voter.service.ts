@@ -40,8 +40,16 @@ export class VoterService {
             collegeId = user.collegeId;
         })
         const request = candidates.map(c => ({ collegeId : collegeId, candidateId : c.id }));
-        console.log(request);
         return this.backendService.casteVote(request, authorizationHeader);
+    }
+
+    voteAlready() {
+        const authorizationHeader = this.authService.getBasicAuthHeader();
+        let collegeId = null;
+        this.authService.user.pipe(take(1)).subscribe(user => {
+            collegeId = user.collegeId;
+        })
+        return this.backendService.voteAlready(collegeId, authorizationHeader);
     }
 
     private fetchCandidates() {

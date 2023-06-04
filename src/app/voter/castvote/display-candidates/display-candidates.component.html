@@ -73,91 +73,100 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" *ngIf="hasAlreadyVoted; else display_candidates">
   <div class="row">
-    <div class="col">
-      <div *ngIf="!isVotingComplete" class="alert alert-danger">
-        <svg
-          class="bi flex-shrink-0 me-2"
-          width="24"
-          height="24"
-          role="img"
-          aria-label="Danger:"
-        >
-          <use xlink:href="#exclamation-triangle-fill" />
-        </svg>
-        Please cast your vote for all positions
-      </div>
-      <div class="float-end mb-3">
-        <button
-          class="btn btn-dark btn-lg bg-gradient text-white"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-        >
-          SUBMIT YOUR VOTES
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div *ngFor="let designation of designations" class="">
-        <p class="h6 bg-dark bg-gradient text-white p-2">
-          {{ designation | uppercase }} CANDIDATES
-        </p>
-        <table class="table bg-white mt-3">
-          <thead class="bg-light">
-            <tr>
-              <th style="width: 25%">NAME</th>
-              <th style="width: 15%">BRANCH</th>
-              <th style="width: 40%">CAMPAIGN QUOTE</th>
-              <th style="width: 10%">SYMBOL</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let candidate of candidatesByDesignation[designation]">
-              <td style="width: 25%">
-                <img
-                  [src]="candidate.imgData"
-                  style="width: 45px; height: 45px"
-                  class="rounded-circle"
-                />
-                <p class="fw-bold d-inline ms-3">
-                  {{ candidate.firstName + " " + candidate.lastName }}
-                </p>
-              </td>
-              <td style="width: 15%">
-                <p>
-                  {{ candidate.branch }}
-                </p>
-              </td>
-              <td style="width: 40%">
-                <p>
-                  {{ candidate.campaignQuote }}
-                </p>
-              </td>
-              <td style="width: 10%">
-                <p class="fw-bold">
-                  {{ candidate.symbol }}
-                </p>
-              </td>
-              <td>
-                <button
-                  class="btn btn-warning btn-sm"
-                  (click)="onCastVote(candidate)"
-                  [disabled]="
-                    selectedDesignations.length > 0 &&
-                    selectedDesignations.includes(candidate.designation)
-                  "
-                >
-                  <small><strong>CAST VOTE</strong></small>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <div class="col">You have already casted your vote</div>
   </div>
 </div>
+<ng-template #display_candidates>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div *ngIf="!isVotingComplete" class="alert alert-danger">
+          <svg
+            class="bi flex-shrink-0 me-2"
+            width="24"
+            height="24"
+            role="img"
+            aria-label="Danger:"
+          >
+            <use xlink:href="#exclamation-triangle-fill" />
+          </svg>
+          Please cast your vote for all positions
+        </div>
+        <div class="float-end mb-3">
+          <button
+            class="btn btn-dark btn-lg bg-gradient text-white"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            SUBMIT YOUR VOTES
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div *ngFor="let designation of designations" class="">
+          <p class="h6 bg-dark bg-gradient text-white p-2">
+            {{ designation | uppercase }} CANDIDATES
+          </p>
+          <table class="table bg-white mt-3">
+            <thead class="bg-light">
+              <tr>
+                <th style="width: 25%">NAME</th>
+                <th style="width: 15%">BRANCH</th>
+                <th style="width: 40%">CAMPAIGN QUOTE</th>
+                <th style="width: 10%">SYMBOL</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let candidate of candidatesByDesignation[designation]"
+              >
+                <td style="width: 25%">
+                  <img
+                    [src]="candidate.imgData"
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                  <p class="fw-bold d-inline ms-3">
+                    {{ candidate.firstName + " " + candidate.lastName }}
+                  </p>
+                </td>
+                <td style="width: 15%">
+                  <p>
+                    {{ candidate.branch }}
+                  </p>
+                </td>
+                <td style="width: 40%">
+                  <p>
+                    {{ candidate.campaignQuote }}
+                  </p>
+                </td>
+                <td style="width: 10%">
+                  <p class="fw-bold">
+                    {{ candidate.symbol }}
+                  </p>
+                </td>
+                <td>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    (click)="onCastVote(candidate)"
+                    [disabled]="
+                      selectedDesignations.length > 0 &&
+                      selectedDesignations.includes(candidate.designation)
+                    "
+                  >
+                    <small><strong>CAST VOTE</strong></small>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

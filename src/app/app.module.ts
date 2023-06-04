@@ -32,6 +32,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header/header.component';
 import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/display-candidates.component';
 import { ConfirmationPopupComponent } from './voter/utils/confirmation-popup/confirmation-popup.component';
+import { DisplayVoteAlreadyComponent } from './voter/castvote/display-vote-already/display-vote-already.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ConfirmationPopupComponent } from './voter/utils/confirmation-popup/con
     ResultComponent,
     HeaderComponent,
     DisplayCandidatesComponent,
-    ConfirmationPopupComponent
+    ConfirmationPopupComponent,
+    DisplayVoteAlreadyComponent
   ],
   imports: [
     BrowserModule,

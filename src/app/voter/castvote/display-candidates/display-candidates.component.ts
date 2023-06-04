@@ -18,9 +18,16 @@ export class DisplayCandidatesComponent {
   selectedDesignations: string[] = [];
   selectedCandidates: Candidate[] = [];
   isVotingComplete = true;
+  hasAlreadyVoted = false;
 
   ngOnInit() {
     this.isLoading = true;
+    this.voterService.voteAlready()
+    .subscribe(val => {
+      if (val) {
+        this.router.navigate(["/voter/vote-already"]);
+      }
+    });
     this.candidatesByDesignation = this.voterService.getCandidatesByDesignation();
     this.designations = Object.keys(this.candidatesByDesignation);
   }

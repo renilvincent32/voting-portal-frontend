@@ -10,6 +10,7 @@ import { AppHomeComponent } from './home/app-home/app-home.component';
 import { LoginComponent } from './login/login/login.component';
 import { DisplayCandidatesComponent } from './voter/castvote/display-candidates/display-candidates.component';
 import { DisplaySuccessComponent } from './voter/castvote/display-success/display-success.component';
+import { DisplayVoteAlreadyComponent } from './voter/castvote/display-vote-already/display-vote-already.component';
 
 const routes: Routes = [
   { 
@@ -67,6 +68,10 @@ const routes: Routes = [
       {
         path: 'display-success',
         component: DisplaySuccessComponent
+      },
+      {
+        path: 'vote-already',
+        component: DisplayVoteAlreadyComponent
       }
     ]
   },

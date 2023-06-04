@@ -68,4 +68,9 @@ export class BackendService {
                                      winnerData: [{ designationName: string, candidateName: string }]}>
         (this.BASE_URI + 'fetchVoteResults', { headers: headers });
     }
+
+    voteAlready(collegeId: string, authorizationHeader: string) {
+        const headers = new HttpHeaders({'Authorization' : authorizationHeader});
+        return this.httpClient.get<boolean>(this.BASE_URI + 'voteAlready/' + collegeId, { headers: headers });
+    }
 }
