@@ -13,7 +13,58 @@
             <br /><br />
           </div>
         </div>
-        <div class="row">
+        <div *ngFor="let designation of designations">
+          <p
+            *ngIf="candidatesByDesignation[designation]"
+            class="h6 bg-dark bg-gradient text-white p-2"
+          >
+            {{ designation | uppercase }} CANDIDATES
+          </p>
+          <table
+            *ngIf="candidatesByDesignation[designation]"
+            class="table bg-white mt-3"
+          >
+            <thead class="bg-light">
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Branch</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Symbol</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let candidate of candidatesByDesignation[designation]"
+              >
+                <td style="width: 15%">
+                  <img
+                    [src]="candidate.imgData"
+                    style="width: 45px; height: 45px"
+                    class="rounded-circle"
+                  />
+                </td>
+
+                <td class="col-content">{{ candidate.firstName }}</td>
+                <td class="col-content">{{ candidate.lastName }}</td>
+                <td class="col-content">{{ candidate.branch }}</td>
+                <td class="col-content">{{ candidate.designation }}</td>
+                <td class="col-content">{{ candidate.symbol }}</td>
+                <td class="col-content">
+                  <button
+                    class="btn btn-dark"
+                    (click)="onRemoveCandidate(candidate)"
+                  >
+                    <small>REMOVE</small>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="row">
           <div class="col-12">
             <table class="table table-striped">
               <thead>
@@ -49,7 +100,7 @@
               </tbody>
             </table>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

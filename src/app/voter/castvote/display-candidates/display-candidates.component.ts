@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Candidate } from 'src/app/admin/candidates/candidate.model';
+import { AdminService } from 'src/app/admin/service/admin.service';
 import { VoterService } from '../../voter.service';
+import { map } from 'rxjs/operators';
+import { ErrorHandlingService } from 'src/app/common/error-handling.service';
 
 @Component({
   selector: 'app-display-candidates',
@@ -10,7 +13,11 @@ import { VoterService } from '../../voter.service';
 })
 export class DisplayCandidatesComponent {
 
-  constructor(private voterService: VoterService, private router: Router) {}
+  constructor(
+    private voterService: VoterService, 
+    private router: Router, 
+    private adminService: AdminService,
+    private errorHandler: ErrorHandlingService) {}
 
   isLoading = false;
   candidatesByDesignation = null;
@@ -28,8 +35,7 @@ export class DisplayCandidatesComponent {
         this.router.navigate(["/voter/vote-already"]);
       }
     });
-    this.candidatesByDesignation = this.voterService.getCandidatesByDesignation();
-    this.designations = Object.keys(this.candidatesByDesignation);
+    this.setCandidates();
   }
 
   onCastVote(candidate: Candidate) {
@@ -49,5 +55,31 @@ export class DisplayCandidatesComponent {
   onVoteAgain() {
     this.selectedCandidates = [];
     this.selectedDesignations = [];
+  }
+
+  setCandidates() {
+    this.adminService.getAllCandidates()
+    .pipe(map(candidates => 
+        candidates.map(candidate =>  
+            new Candidate(candidate.firstName, candidate.lastName, candidate.branch, 
+                candidate.campaignQuote, candidate.designation, candidate.symbol, 
+                candidate.img, candidate.id, 
+                candidate.imgData ? "data:image/png;base64,"+candidate.imgData: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png") )))
+    .subscribe(data => {
+      this.candidatesByDesignation = data.reduce((map, candidate) => {
+        const designation = candidate.designation;
+        if (map[designation] !== undefined) {
+            let candidates: Candidate[] = map[designation];
+            candidates.push(candidate);
+            map[designation] = candidates;
+        } else {
+            map[designation] = [candidate];
+        }
+        return map
+    } , {});
+    this.designations = Object.keys(this.candidatesByDesignation);
+    }, error => {
+        this.errorHandler.handleHttpError(error);
+    });
   }
 }

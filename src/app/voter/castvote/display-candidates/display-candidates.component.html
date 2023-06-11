@@ -125,32 +125,24 @@
               <tr
                 *ngFor="let candidate of candidatesByDesignation[designation]"
               >
-                <td style="width: 25%">
+                <td style="width: 25%" class="col-content fw-bold ms-3">
                   <img
                     [src]="candidate.imgData"
                     style="width: 45px; height: 45px"
                     class="rounded-circle"
                   />
-                  <p class="fw-bold d-inline ms-3">
-                    {{ candidate.firstName + " " + candidate.lastName }}
-                  </p>
+                  {{ candidate.firstName + " " + candidate.lastName }}
                 </td>
-                <td style="width: 15%">
-                  <p>
-                    {{ candidate.branch }}
-                  </p>
+                <td style="width: 15%" class="col-content">
+                  {{ candidate.branch }}
                 </td>
-                <td style="width: 40%">
-                  <p>
-                    {{ candidate.campaignQuote }}
-                  </p>
+                <td style="width: 40%" class="col-content">
+                  {{ candidate.campaignQuote }}
                 </td>
-                <td style="width: 10%">
-                  <p class="fw-bold">
-                    {{ candidate.symbol }}
-                  </p>
+                <td style="width: 10%" class="col-content fw-bold">
+                  {{ candidate.symbol }}
                 </td>
-                <td>
+                <td class="col-content">
                   <button
                     class="btn btn-warning btn-sm"
                     (click)="onCastVote(candidate)"
