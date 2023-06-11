@@ -17,7 +17,7 @@ export class ViewCandidatesComponent {
   candidatesByDesignation = null;
   designations = null;
 
-  constructor(private adminService: AdminService, private errorHandler: ErrorHandlingService, private voterService: VoterService) {}
+  constructor(private adminService: AdminService, private errorHandler: ErrorHandlingService) {}
 
   ngOnInit() {
     this.setCandidates();
